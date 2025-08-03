@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Images</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black min-h-screen flex items-center justify-center text-purple-300">
+
+  <form method="POST" enctype="multipart/form-data"
+        class="w-[90%] max-w-[1000px] flex flex-col items-center gap-10 text-purple-300">
+
+    <h3 class="text-3xl font-bold mb-4 text-purple-300">
+      Upload Images for {{model}} ({{brand}})
+    </h3>
+
+    <!-- Grid of upload boxes -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full justify-items-center">
+      {% for angle in angles %}
+        <label class="cursor-pointer relative flex flex-col items-center gap-4 bg-gray-900 border border-purple-500 rounded-xl p-6 w-full hover:bg-purple-600 transition-all group">
+
+          <!-- File Upload Input -->
+          <input type="file" name="{{angle}}" required class="hidden peer" onchange="this.previousElementSibling.textContent = this.files[0]?.name || 'Choose File'">
+
+          <!-- Angle Name -->
+          <span class="text-xl font-semibold text-center peer-checked:text-white break-words">
+            {{angle}}
+          </span>
+
+          <!-- Demo Image -->
+          {% if model %}
+            <img src="{{ url_for('static', filename='demo_images/' + model + '_' + angle + '.jpg') }}"
+                 alt="Demo Image"
+                 class="w-28 h-28 object-contain  ">
+          {% endif %}
+
+          <!-- Optional border highlight -->
+          <div class="absolute top-0 left-0 w-full h-full rounded-xl border-4 border-transparent peer-checked:border-purple-300"></div>
+        </label>
+      {% endfor %}
+    </div>
+
+    <button type="submit"
+      class="mt-6 py-3 px-10 border border-purple-400 text-purple-300 hover:bg-purple-700 hover:text-white rounded-xl transition-all">
+      Upload and Verify
+    </button>
+
+  </form>
+
+</body>
+</html>

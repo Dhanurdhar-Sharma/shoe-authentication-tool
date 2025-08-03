@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Brand</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black min-h-screen flex items-center justify-center text-purple-300">
+
+  <form method="POST" class="w-[90%] max-w-[1000px] flex flex-col items-center gap-10 text-purple-300">
+
+    <h3 class="text-4xl font-bold mb-6 text-purple-300">Select Brand</h3>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-16  w-full justify-around items-center ">
+      {% for b in brands %}
+        <label class="cursor-pointer flex flex-col items-center gap-4">
+          <input type="radio" name="brand" value="{{b}}" required class="hidden peer">
+
+          <!-- Brand logo only -->
+          <img src="{{ url_for('static', filename='images/' + b + '.png') }}"
+               alt="{{b}} logo"
+               class="w-36 h-36 object-contain border-4 border-white rounded-full transition-transform duration-300 group-hover:scale-105 peer-checked:border-purple-500">
+
+          <!-- Brand name -->
+          <span class="text-2xl font-semibold peer-checked:text-white">{{b}}</span>
+        </label>
+      {% endfor %}
+    </div>
+
+    <button type="submit"
+      class="mt-10 py-4 px-12 text-xl border border-purple-400 text-purple-300 hover:bg-purple-700 hover:text-white rounded-xl transition-all">
+      Next
+    </button>
+    
+  </form>
+
+</body>
+</html>
