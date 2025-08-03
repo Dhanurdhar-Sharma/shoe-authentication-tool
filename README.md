@@ -52,27 +52,28 @@ python app.py
 
 ## 📁 Project Structure
 
-.
-├── app.py
-├── requirements.txt
-├── models/
-│   └── brand_model.keras
-│   └── brand_label_encoders.joblib
-├── category/
-│   └── shoes/
-│        └── brand/
-│           └── model/
-│               └── model_summary.json
-├── uploaded/
-├── static/
-│   └── demo_images/
-├── templates/
-│   ├── select_gender.html
-│   ├── select_category.html
-│   ├── select_brand.html
-│   ├── select_product.html
-│   ├── upload.html
-│   └── result.html
+📦 shoe-authentication-tool
+├── 🐍 app.py
+├── 📄 requirements.txt
+├── 🧠 models/
+│   ├── 🧩 brand_model.keras
+│   └── 🧠 brand_label_encoders.joblib
+├── 🗂️ category/
+│   └── 👟 shoes/
+│       └── 🏷️ brand/
+│           └── 📦 model/
+│               └── 📄 model_summary.json
+├── 📤 uploaded/
+├── 🌐 static/
+│   └── 🖼️ demo_images/
+├── 📝 templates/
+│   ├── 🧾 select_gender.html
+│   ├── 🧾 select_category.html
+│   ├── 🧾 select_brand.html
+│   ├── 🧾 select_product.html
+│   ├── 🧾 upload.html
+│   └── 🧾 result.html
+
 
 ---
 
