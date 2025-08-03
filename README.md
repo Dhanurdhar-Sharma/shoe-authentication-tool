@@ -1,66 +1,55 @@
-# shoe-authentication-tool
-# 👟 Shoe Authenticity Verification Web App
+👟 Shoe Authenticity Verification Web App
+A Flask-based web application that uses a deep learning model to verify the authenticity of branded shoes based on images from multiple angles (logo, side, top, sole, etc.).
 
-A Flask-based web application that uses a deep learning model to verify the authenticity of branded shoes based on multiple angle images (logo, side, top, sole, etc.).
+🔧 Features
+Select Gender, Category, Brand, and Product.
 
----
+Upload images from required angles.
 
-## 🔧 Features
+Predicts model and angle using a trained Keras model.
 
-- Select Gender, Category, Brand, and Product.
-- Upload images from required angles.
-- Predicts model and angle using a trained Keras model.
+🧠 Tech Stack
+Python 3.11
 
----
+Flask (web framework)
 
-## 🧠 Tech Stack
+TensorFlow (model inference)
 
-- Python 3.11
-- Flask (Web framework)
-- TensorFlow (Model inference)
-- scikit-learn (LabelEncoder via `joblib`)
-- Pillow (Image processing)
-- NumPy
+scikit-learn (LabelEncoder via joblib)
 
----
+Pillow (image processing)
 
+NumPy
 
-
-## ⚠️ Python Compatibility
-
-📌 **This app requires Python 3.11**  
-TensorFlow does **not support Python 3.13** as of now.
+⚠️ Python Compatibility
+📌 This app requires Python 3.11
+TensorFlow does not support Python 3.13 at this time.
 
 To check your version:
-```bash
+
+bash
 python --version
-if needed then download python 3.11
-## 🚀 How to Run
+If needed, download Python 3.11.
 
----
-
-
-```bash
+🚀 How to Run
+bash
 git clone https://github.com/Dhanurdhar-Sharma/shoe-authentication-tool.git
 cd shoe-authenticator
 python -m venv venv
 source venv/bin/activate      # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 python app.py
-
----
-
-## 📁 Project Structure
-
+📁 Project Structure
+text
 .
 ├── app.py
 ├── requirements.txt
 ├── models/
-│   └── brand_model.keras
+│   ├── brand_model.keras
 │   └── brand_label_encoders.joblib
 ├── category/
 │   └── shoes/
-│        └── brand/
+│       └── brand/
 │           └── model/
 │               └── model_summary.json
 ├── uploaded/
@@ -73,8 +62,7 @@ python app.py
 │   ├── select_product.html
 │   ├── upload.html
 │   └── result.html
-
----
-
 Made with ❤️ by Dhanurdhar Sharma
 during my internship at Luxury in Taste.
+
+You can copy and paste this section directly into your README.md file.
