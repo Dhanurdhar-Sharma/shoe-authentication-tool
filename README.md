@@ -51,7 +51,7 @@ python app.py
 
 
 ## 📁 Project Structure
-
+```
 📦 shoe-authentication-tool
 ├── 🐍 app.py
 ├── 📄 requirements.txt
@@ -74,7 +74,7 @@ python app.py
 │   ├── 🧾 upload.html
 │   └── 🧾 result.html
 
-
+```
 ---
 
 Made with ❤️ by Dhanurdhar Sharma
