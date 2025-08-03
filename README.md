@@ -1,68 +1,65 @@
-👟 Shoe Authenticity Verification Web App
+# shoe-authentication-tool
+# 👟 Shoe Authenticity Verification Web App
+
 A Flask-based web application that uses a deep learning model to verify the authenticity of branded shoes based on images from multiple angles (logo, side, top, sole, etc.).
 
-🔧 Features
-Select Gender, Category, Brand, and Product.
+## 🔧 Features
 
-Upload images from required angles.
+- Select Gender, Category, Brand, and Product.
+- Upload images from required angles.
+- Predicts model and angle using a trained Keras model.
 
-Predicts model and angle using a trained Keras model.
+## 🧠 Tech Stack
 
-🧠 Tech Stack
-Python 3.11
+- Python 3.11
+- Flask (web framework)
+- TensorFlow (model inference)
+- scikit-learn (LabelEncoder via `joblib`)
+- Pillow (image processing)
+- NumPy
 
-Flask (web framework)
+## ⚠️ Python Compatibility
 
-TensorFlow (model inference)
+📌 **This app requires Python 3.11**  
+TensorFlow does **not support Python 3.13** at this time.
 
-scikit-learn (LabelEncoder via joblib)
-
-Pillow (image processing)
-
-NumPy
-
-⚠️ Python Compatibility
-📌 This app requires Python 3.11
-TensorFlow does not support Python 3.13 at this time.
-
-To check your version:
-
-bash
-python --version
+To check your Python version:
 If needed, download Python 3.11.
 
-🚀 How to Run
-bash
+## 🚀 How to Run
+
 git clone https://github.com/Dhanurdhar-Sharma/shoe-authentication-tool.git
 cd shoe-authenticator
 python -m venv venv
-source venv/bin/activate      # On Windows: venv\Scripts\activate
+source venv/bin/activate # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 python app.py
-📁 Project Structure
-text
+
+
+## 📁 Project Structure
+
 .
 ├── app.py
 ├── requirements.txt
 ├── models/
-│   ├── brand_model.keras
-│   └── brand_label_encoders.joblib
+│ ├── brand_model.keras
+│ └── brand_label_encoders.joblib
 ├── category/
-│   └── shoes/
-│       └── brand/
-│           └── model/
-│               └── model_summary.json
+│ └── shoes/
+│ └── brand/
+│ └── model/
+│ └── model_summary.json
 ├── uploaded/
 ├── static/
-│   └── demo_images/
+│ └── demo_images/
 ├── templates/
-│   ├── select_gender.html
-│   ├── select_category.html
-│   ├── select_brand.html
-│   ├── select_product.html
-│   ├── upload.html
-│   └── result.html
-Made with ❤️ by Dhanurdhar Sharma
-during my internship at Luxury in Taste.
+│ ├── select_gender.html
+│ ├── select_category.html
+│ ├── select_brand.html
+│ ├── select_product.html
+│ ├── upload.html
+│ └── result.html
 
-You can copy and paste this section directly into your README.md file.
+
+Made with ❤️ by Dhanurdhar Sharma  
+during my internship at Luxury in Taste.
