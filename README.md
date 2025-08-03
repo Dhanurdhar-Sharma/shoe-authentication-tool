@@ -32,8 +32,8 @@ TensorFlow does **not support Python 3.13** as of now.
 To check your version:
 ```bash
 python --version
-if needed then download python 3.11
-
+#if needed then download python 3.11
+```
 ---
 
 ## 🚀 How to Run
@@ -46,7 +46,7 @@ python -m venv venv
 source venv/bin/activate      # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 python app.py
-
+```
 ---
 
 
