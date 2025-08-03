@@ -24,6 +24,18 @@ A Flask-based web application that uses a deep learning model to verify the auth
 
 ---
 
+## ⚠️ Python Compatibility
+
+📌 **This app requires Python 3.11**  
+TensorFlow does **not support Python 3.13** as of now.
+
+To check your version:
+```bash
+python --version
+if needed then download python 3.11
+
+---
+
 ## 🚀 How to Run
 
 
@@ -35,16 +47,7 @@ source venv/bin/activate      # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 python app.py
 
-
-## ⚠️ Python Compatibility
-
-📌 **This app requires Python 3.11**  
-TensorFlow does **not support Python 3.13** as of now.
-
-To check your version:
-```bash
-python --version
-if needed then download python 3.11
+---
 
 
 ## 📁 Project Structure
@@ -70,6 +73,8 @@ if needed then download python 3.11
 │   ├── select_product.html
 │   ├── upload.html
 │   └── result.html
+
+---
 
 Made with ❤️ by Dhanurdhar Sharma
 is this correct
