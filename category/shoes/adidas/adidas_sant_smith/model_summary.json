@@ -1,0 +1,7 @@
+{
+    "brand": "adidas",
+    "model": "adidas sant smith",
+    "folder_name": "adidas_sant_smith",
+    "gender":"male",
+    "angles": ["side1", "side2", "sole", "top", "logo"]
+}

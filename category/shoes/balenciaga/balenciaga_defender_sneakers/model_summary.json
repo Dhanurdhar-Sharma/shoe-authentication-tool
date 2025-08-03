@@ -1,0 +1,7 @@
+{
+    "brand": "balenciaga",
+    "model": "balenciaga defender sneakers",
+    "folder_name": "balenciaga_defender_sneakers",
+    "gender":"male",
+    "angles": ["side1", "side2", "sole", "top", "logo"]
+}

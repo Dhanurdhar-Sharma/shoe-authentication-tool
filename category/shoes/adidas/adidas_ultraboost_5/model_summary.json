@@ -1,0 +1,7 @@
+{
+    "brand": "adidas",
+    "model": "adidas ultraboost 5",
+    "folder_name": "adidas_ultraboost_5",
+    "gender":"male",
+    "angles": ["side1", "side2", "sole", "top", "logo"]
+}

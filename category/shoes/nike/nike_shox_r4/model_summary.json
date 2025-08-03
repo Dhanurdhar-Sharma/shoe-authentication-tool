@@ -1,0 +1,7 @@
+{
+    "brand": "nike",
+    "model": "nike shox r4",
+    "folder_name": "nike_shox_r4",
+    "gender":"male",
+    "angles": ["side1", "side2", "sole", "top", "back", "logo"]
+}

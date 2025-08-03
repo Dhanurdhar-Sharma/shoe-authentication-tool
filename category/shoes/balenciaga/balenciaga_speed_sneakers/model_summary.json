@@ -1,0 +1,7 @@
+{
+    "brand": "balenciaga",
+    "model": "balenciaga speed sneakers",
+    "folder_name": "balenciaga_speed_sneakers",
+    "gender":"male",
+    "angles": ["side1", "side2", "sole", "top", "logo"]
+}

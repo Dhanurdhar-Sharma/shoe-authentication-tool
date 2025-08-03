@@ -1,0 +1,7 @@
+{
+    "brand": "nike",
+    "model": "nike dunk",
+    "folder_name": "nike_dunk",
+    "gender":"male",
+    "angles": ["side1", "side2", "sole", "top", "back", "logo"]
+}

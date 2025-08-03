@@ -1,0 +1,7 @@
+{
+    "brand": "balenciaga",
+    "model": "balenciaga runner sneakers",
+    "folder_name": "balenciaga_runner_sneakers",
+    "gender":"male",
+    "angles": ["side1", "side2", "sole", "top", "logo"]
+}

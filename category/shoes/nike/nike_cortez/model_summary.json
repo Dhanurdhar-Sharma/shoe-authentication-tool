@@ -1,0 +1,7 @@
+{
+    "brand": "nike",
+    "model": "nike cortez",
+    "folder_name": "nike_cortez",
+    "gender":"male",
+    "angles": ["side1", "side2", "sole", "top", "back", "logo"]
+}

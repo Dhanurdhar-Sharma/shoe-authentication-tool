@@ -1,0 +1,7 @@
+{
+    "brand": "nike",
+    "model": "nike air max 90",
+    "folder_name": "nike_air_max_90",
+    "gender":"male",
+    "angles": ["side1", "side2", "sole", "top", "back", "logo"]
+}

@@ -1,0 +1,7 @@
+{
+    "brand": "adidas",
+    "model": "adidas samba og ",
+    "folder_name": "adidas_samba_og",
+    "gender":"male",
+    "angles": ["side1", "side2", "sole", "top", "logo"]
+}
