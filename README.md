@@ -15,7 +15,7 @@ A Flask-based web application that uses a deep learning model to verify the auth
 
 ## 🧠 Tech Stack
 
-- Python 3.11
+- Python 3.11.9
 - Flask (Web framework)
 - TensorFlow (Model inference)
 - scikit-learn (LabelEncoder via `joblib`)
@@ -26,7 +26,7 @@ A Flask-based web application that uses a deep learning model to verify the auth
 
 ## ⚠️ Python Compatibility
 
-📌 **This app requires Python 3.11**  
+📌 **This app requires Python 3.11.9**  
 TensorFlow does **not support Python 3.13** as of now.
 
 To check your version:
