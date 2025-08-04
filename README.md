@@ -32,7 +32,7 @@ TensorFlow does **not support Python 3.13** as of now.
 To check your version:
 ```bash
 python --version
-#if needed then download python 3.11
+#if needed then download python 3.11.9
 ```
 ---
 
