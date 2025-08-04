@@ -78,4 +78,4 @@ python app.py
 ---
 
 Made with ❤️ by Dhanurdhar Sharma
-is this correct
+during internship at Luxury in Taste
