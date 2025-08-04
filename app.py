@@ -10,54 +10,49 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 app = Flask(__name__)
 app.secret_key = "b8e2f54ce750c3418c997e4025637e2c8f61ac4311fbc8a741726a7b4c980cfa"
 
-# ✅ Use relative paths to make it portable
+# --- Paths ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# Paths to subdirectories
-DATASET_DIR = os.path.join(BASE_DIR, "category", "shoes")        # models & summaries
-UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploaded")               # uploaded images
-STATIC_DEMO_FOLDER = os.path.join(BASE_DIR, "static", "demo_images")  # demo images
-MODELS_DIR = os.path.join(BASE_DIR, "models")                    # saved .keras + .joblib
+DATASET_DIR = os.path.join(BASE_DIR, "category", "shoes")
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploaded")
+STATIC_DEMO_FOLDER = os.path.join(BASE_DIR, "static", "demo_images")
+MODELS_DIR = os.path.join(BASE_DIR, "models")
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Load and preprocess image
+# --- Utilities ---
 def load_and_resize(img_path, target_size=(128, 128)):
-    img = Image.open(img_path)
-    print("Before:", img.mode)
-    img = img.convert("RGB")
-    img = img.resize(target_size)
-    img_array = np.array(img).astype(np.float32) / 255.0
-    assert img_array.shape == (128, 128, 3), f"Invalid shape: {img_array.shape}"
-    return img_array
-
-
-
+    try:
+        img = Image.open(img_path).convert("RGB")
+        img = img.resize(target_size)
+        img_array = np.array(img).astype(np.float32) / 255.0
+        assert img_array.shape == (128, 128, 3), f"Invalid shape: {img_array.shape}"
+        return img_array
+    except Exception as e:
+        print(f"Error loading image {img_path}: {e}")
+        return None
 
 def get_brands(base_dir):
     return sorted([d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))])
 
 def get_brand_models(base_dir, brand):
     brand_dir = os.path.join(base_dir, brand)
-    folders = sorted([d for d in os.listdir(brand_dir) if os.path.isdir(os.path.join(brand_dir, d))])
     products, summaries = [], []
-    for folder in folders:
+    for folder in sorted(os.listdir(brand_dir)):
         summary_file = os.path.join(brand_dir, folder, "model_summary.json")
         if os.path.exists(summary_file):
             with open(summary_file, "r", encoding="utf-8") as f:
                 summary = json.load(f)
             products.append(summary["model"].strip())
             summaries.append((folder, summary))
-    return products, summaries
+    return products, [s for f, s in summaries]
 
 def get_required_angles(summary):
-    return summary["angles"]
+    return summary.get("angles", [])
 
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png','jpg','jpeg'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg'}
 
-# ---- Routes ----
-
+# --- Routes ---
 @app.route("/", methods=["GET", "POST"])
 def select_gender():
     if request.method == "POST":
@@ -76,33 +71,31 @@ def select_category():
 def select_brand():
     brands = get_brands(DATASET_DIR)
     if request.method == "POST":
-        brand = request.form.get("brand")
-        session["brand"] = brand
+        session["brand"] = request.form.get("brand")
         return redirect(url_for("select_product"))
     return render_template("select_brand.html", brands=brands)
 
 @app.route("/product", methods=["GET", "POST"])
 def select_product():
-    brand = session["brand"]
+    brand = session.get("brand")
     products, summaries = get_brand_models(DATASET_DIR, brand)
     session["products"] = products
-    session["summaries"] = [s for f,s in summaries]
+    session["summaries"] = summaries
     if request.method == "POST":
-        prod_idx = int(request.form.get("product_idx"))
-        session["product_idx"] = prod_idx
+        session["product_idx"] = int(request.form.get("product_idx"))
         return redirect(url_for("upload_photos"))
     return render_template("select_product.html", products=products, brand=brand)
 
 @app.route("/upload", methods=["GET", "POST"])
 def upload_photos():
-    brand = session["brand"]
-    prod_idx = session["product_idx"]
+    brand = session.get("brand")
+    prod_idx = session.get("product_idx")
     model_name = session["products"][prod_idx]
     summary = session["summaries"][prod_idx]
     angles = get_required_angles(summary)
 
     demo_imgs = [
-        url_for('static', filename=f"demo_images/{brand}_{model_name.replace(' ', '_')}_{ang}.jpg")
+        url_for("static", filename=f"demo_images/{brand}_{model_name.replace(' ', '_')}_{ang}.jpg")
         for ang in angles
     ]
 
@@ -125,8 +118,8 @@ def upload_photos():
 
 @app.route("/result")
 def results():
-    brand = session["brand"]
-    prod_idx = session["product_idx"]
+    brand = session.get("brand")
+    prod_idx = session.get("product_idx")
     model_name = session["products"][prod_idx]
     summary = session["summaries"][prod_idx]
     angles = get_required_angles(summary)
@@ -143,15 +136,17 @@ def results():
 
     results = {}
     for angle in angles:
-        fpath = files[angle]
+        fpath = files.get(angle)
         img = load_and_resize(fpath)
+        if img is None:
+            results[angle] = {"filename": os.path.basename(fpath), "status": "Error loading image"}
+            continue
         img_batch = np.expand_dims(img, axis=0)
-        assert img_batch.shape == (1, 128, 128, 3), f"Unexpected image shape: {img_batch.shape}"
         preds = model.predict(img_batch)
         model_pred_id = np.argmax(preds[0], axis=1)[0]
         angle_pred_id = np.argmax(preds[1], axis=1)[0]
-        pred_model = label_encoders['model'].inverse_transform([model_pred_id])[0]
-        pred_angle = label_encoders['angle'].inverse_transform([angle_pred_id])[0]
+        pred_model = label_encoders["model"].inverse_transform([model_pred_id])[0]
+        pred_angle = label_encoders["angle"].inverse_transform([angle_pred_id])[0]
         is_correct = (pred_model.strip().lower() == model_name.strip().lower() and pred_angle == angle)
         results[angle] = {
             "filename": os.path.basename(fpath),
@@ -161,17 +156,18 @@ def results():
             "expected_angle": angle,
             "status": "CORRECT" if is_correct else "MISMATCH!"
         }
+
     logo_status = results.get("logo", {}).get("status", "MISMATCH!")
-    support_results = [v for k,v in results.items() if k != "logo"]
-    num_support = len(support_results)
-    num_support_mismatch = sum(1 for r in support_results if r["status"] != "CORRECT")
-    if logo_status == "CORRECT":
-        if num_support_mismatch == 0:
-            verdict = f"✅ PASS: Logo and all supporting images are correct."
-        else:
-            verdict = f"✅ PASS (logo verified):"
+    support_results = [v for k, v in results.items() if k != "logo"]
+    mismatches = sum(1 for r in support_results if r["status"] != "CORRECT")
+
+    if logo_status == "CORRECT" and mismatches == 0:
+        verdict = "✅ PASS: Logo and all supporting images are correct."
+    elif logo_status == "CORRECT":
+        verdict = "✅ PASS (logo verified): but some support angles mismatched."
     else:
-        verdict = f"❌ FAIL: images mismatched. Product cannot be verified, regardless of other images."
+        verdict = "❌ FAIL: Logo mismatch. Cannot verify authenticity."
+
     return render_template("result.html", results=results, verdict=verdict, brand=brand, model=model_name)
 
 if __name__ == "__main__":
