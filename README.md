@@ -2,6 +2,7 @@
 # 👟 Shoe Authenticity Verification Web App
 
 A Flask-based web application that uses a deep learning model to verify the authenticity of branded shoes based on multiple angle images (logo, side, top, sole, etc.).
+[Watch Demo Video](https://drive.google.com/file/d/1EPKzc67tbi2FFhyBXJYSHWAOx9jSrfo-/view?usp=sharing)
 
 ---
 
